@@ -1,5 +1,6 @@
+import { DataType, PostInput } from "./App.type";
 
-const postData = {
+const postData: PostInput = {
     "ticker": "AAPL",
     "period": "1y",
     "buy_dict": {
@@ -40,7 +41,7 @@ const postData = {
     }
 }
 
-const dummyData = {
+const dummyData: DataType = {
     "dates": [
         "2022-12-07 00:00:00-05:00",
         "2022-12-08 00:00:00-05:00",

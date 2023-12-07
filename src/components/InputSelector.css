@@ -1,0 +1,61 @@
+.selectGroup {
+    display: flex;
+    /* flex-direction: column; */
+    align-content: center;
+    /* justify-content: center; */
+    align-items: center;
+
+}
+
+.selectItem {
+    margin-right: 6px;
+}
+
+.strategies {
+    display: flex;
+}
+
+.strategyColumn {
+    flex: 1;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.statHeader {
+    display: flex;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.statTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.statGroup {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.error {
+    color: red;
+    font-size: 20px;
+    text-align: center;
+}
+
+.topGroup {
+    display: flex;
+    /* flex-direction: column; */
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10px; */
+    padding-bottom: 10px;
+}
