@@ -8,6 +8,7 @@ import { InputSelector } from './components/InputSelector';
 import '@mantine/core/styles.css';
 import { Loader, MantineProvider, createTheme } from '@mantine/core';
 import "./components/InputSelector.css"
+import { BuySellChart } from './components/BuySellChart';
 
 function App() {
 
@@ -24,7 +25,10 @@ function App() {
           <Loader size={60} />
         </div> : null}
       {backtesterData ?
-        <div className="chartContainer"><LineChart data={backtesterData} /></div> : null}
+        <div className="chartContainer">
+          <LineChart data={backtesterData} />
+          <BuySellChart data={backtesterData} />
+        </div> : null}
     </MantineProvider>
   );
 }
