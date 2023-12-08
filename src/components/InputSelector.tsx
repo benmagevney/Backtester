@@ -222,10 +222,10 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
             {invalidPost ? <div className="error">Invalid post input. Fix errors and submit again.</div> : null}
             {invalidTickerPeriod ? <div className="error">Ticker and period must be defined</div> : null}
             <div className='topGroup'>
-                <TextInput className="selectItem" label="Stock Ticker" placeholder={"Ticker"} value={ticker === null ? undefined : ticker}
+                <TextInput className="selectItem" placeholder={"Ticker"} value={ticker === null ? undefined : ticker}
                     onChange={(event) => setTicker(event.currentTarget.value)}
-                    error={ticker === null} />
-                <Select className="selectItem" label="Period" placeholder="Period range"
+                />
+                <Select className="selectItem" placeholder="Period range" 
                     data={[
                         { value: '1y', label: '1 Year' },
                         { value: '2y', label: '2 Years' },
@@ -235,18 +235,18 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
                         { value: 'max', label: 'Max' },
                     ]}
                     onChange={(value) => setPeriod(value)}
-                    error={period == undefined} />
-                <Button variant="filled" onClick={handleSubmit} color="red">Submit</Button>
+                    error={period === undefined} />
+                <Button variant="filled" onClick={handleSubmit} color="rgba(93,211,158,255)" >Submit</Button>
             </div>
             {invalidStrategy ? <div className="error">Must have at least one buy and sell strategy</div> : null}
             <div className="strategies">
-                <div className="strategyColumn">
+                <div className="strategyColumn card m-1" style = {{background:'rgba(56,59,79,0.7)'}}>
                     <div className="title">Buy Strategy</div>
                     <RSISelector useRSI={useBuyRSI} setRSI={setUseBuyRSI} RSIDays={buyRSIDays} setRSIDays={setBuyRSIDays} RSISymbol={buyRSISymbol} setRSISymbol={setBuyRSISymbol} RSIValue={buyRSIValue} setRSIValue={setBuyRSIValue} RSISlope={buyRSISlope} setRSISlope={setBuyRSISlope} />
                     <MACDSelector useMACD={useBuyMACD} setMACD={setUseBuyMACD} MACDFast={buyMACDFast} setMACDFast={setBuyMACDFast} MACDSlow={buyMACDSlow} setMACDSlow={setBuyMACDSlow} MACDSignal={buyMACDSignal} setMACDSignal={setBuyMACDSignal} MACDSymbol={buyMACDSymbol} setMACDSymbol={setBuyMACDSymbol} MACDValue={buyMACDValue} setMACDValue={setBuyMACDValue} MACDSlope={buyMACDSlope} setMACDSlope={setBuyMACDSlope} MACDSignalOptional={buyMACDSignalOptional} setMACDSignalOptional={setBuyMACDSignalOptional} MACDSignalSlope={buyMACDSignalSlope} setMACDSignalSlope={setBuyMACDSignalSlope} MACDSignalDiff={buyMACDSignalDiff} setMACDSignalDiff={setBuyMACDSignalDiff} />
                     <SMASelector useSMA={useBuySMA} setSMA={setUseBuySMA} SMADays={buySMADays} setSMADays={setBuySMADays} SMASymbol={buySMASymbol} setSMASymbol={setBuySMASymbol} SMAValue={buySMAValue} setSMAValue={setBuySMAValue} />
                 </div>
-                <div className="strategyColumn">
+                <div className="strategyColumn card m-1" style = {{background:'rgba(56,59,79,0.7)'}}>
                     <div className="title">Sell Strategy</div>
                     <RSISelector useRSI={useSellRSI} setRSI={setUseSellRSI} RSIDays={sellRSIDays} setRSIDays={setSellRSIDays} RSISymbol={sellRSISymbol} setRSISymbol={setSellRSISymbol} RSIValue={sellRSIValue} setRSIValue={setSellRSIValue} RSISlope={sellRSISlope} setRSISlope={setSellRSISlope} />
                     <MACDSelector useMACD={useSellMACD} setMACD={setUseSellMACD} MACDFast={sellMACDFast} setMACDFast={setSellMACDFast} MACDSlow={sellMACDSlow} setMACDSlow={setSellMACDSlow} MACDSignal={sellMACDSignal} setMACDSignal={setSellMACDSignal} MACDSymbol={sellMACDSymbol} setMACDSymbol={setSellMACDSymbol} MACDValue={sellMACDValue} setMACDValue={setSellMACDValue} MACDSlope={sellMACDSlope} setMACDSlope={setSellMACDSlope} MACDSignalOptional={sellMACDSignalOptional} setMACDSignalOptional={setSellMACDSignalOptional} MACDSignalSlope={sellMACDSignalSlope} setMACDSignalSlope={setSellMACDSignalSlope} MACDSignalDiff={sellMACDSignalDiff} setMACDSignalDiff={setSellMACDSignalDiff} />

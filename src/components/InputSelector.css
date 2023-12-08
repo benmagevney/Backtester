@@ -4,6 +4,7 @@
     align-content: center;
     /* justify-content: center; */
     align-items: center;
+    color: white;
 }
 
 .selectItem {
@@ -18,7 +19,6 @@
     flex: 1;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
     padding: 10px;
 }
 
@@ -27,15 +27,17 @@
 }
 
 .title {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: bold;
     margin-right: 10px;
+    color: white;
 }
 
 .statTitle {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     margin-right: 10px;
+    color: white;
 }
 
 .statHeading {
@@ -60,7 +62,7 @@
     /* flex-direction: column; */
     align-content: center;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     /* padding: 10px; */
     padding-bottom: 10px;
 }
@@ -75,3 +77,4 @@
     margin-right: 10px;
     padding-top: 20px;
 }
+

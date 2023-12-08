@@ -16,7 +16,7 @@ type SMASelectorProps = {
 
 export function SMASelector({ useSMA, setSMA, SMADays, setSMADays, SMASymbol, setSMASymbol, SMAValue, setSMAValue }: SMASelectorProps) {
 
-    const [opened, setOpened] = useState<boolean>(true);
+    const [opened, setOpened] = useState<boolean>(false);
 
     const toggleUseSMA = () => {
         setSMA(!useSMA);
@@ -34,20 +34,18 @@ export function SMASelector({ useSMA, setSMA, SMADays, setSMADays, SMASymbol, se
                 <div className="statTitle">SMA</div>
                 <Checkbox
                     checked={useSMA}
-                    label="Use SMA"
                     onChange={() => toggleUseSMA()}
                 />
-                <Button style={{ marginLeft: "10px" }} size="xs" onClick={() => setOpened(!opened)}>{opened ? "Close" : "Show Details"}</Button>
             </div>
             <Collapse in={opened}>
                 <div className="selectGroup">
-                    <NumberInput className="selectItem" label="# of Days" min={0}
+                    <NumberInput className="selectItem" label="# of Days" style={{color: "white"}} min={0}
                         value={SMADays} onChange={(value) => setSMADays(typeof value === "number" ? value : parseInt(value))}
                         disabled={!useSMA} error={useSMA && (typeof SMADays !== "number" || Number.isNaN(SMADays))} />
-                    <Select className="selectItem" label="Symbol" value={SMASymbol} onChange={(value) => setSMASymbol(value == null ? undefined : value as SupportedSignal)}
+                    <Select className="selectItem" label="Symbol" style={{color: "white"}} value={SMASymbol} onChange={(value) => setSMASymbol(value == null ? undefined : value as SupportedSignal)}
                         data={[">=", "<="]}
                         disabled={!useSMA} error={useSMA && SMASymbol === undefined} />
-                    <NumberInput className="selectItem" label="Value" prefix="$" min={0}
+                    <NumberInput className="selectItem" label="Value" style={{color: "white"}} min={0}
                         value={SMAValue} onChange={(value) => setSMAValue(typeof value === "number" ? value : parseInt(value))}
                         disabled={!useSMA} error={useSMA && (typeof SMAValue !== "number" || Number.isNaN(SMAValue))} />
                 </div>

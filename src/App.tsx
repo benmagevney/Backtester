@@ -1,5 +1,6 @@
 import { useState } from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import './App.css';
 import { DataType } from './utils/App.type';
@@ -17,19 +18,26 @@ function App() {
 
   console.log(backtesterData);
   return (
-    <MantineProvider>
-      <div style={{ fontSize: "40px", textAlign: "center", fontWeight: "bold" }}>Stock Backtester</div>
-      <InputSelector setBacktesterData={setBacktesterData} setIsLoading={setIsLoading} />
-      {isLoading ?
-        <div style={{ display: "flex", justifyContent: "center", paddingTop: "30px" }}>
-          <Loader size={60} />
-        </div> : null}
-      {backtesterData ?
+    <div style={{background:'rgba(35,38,61,255)'}}>
+        <MantineProvider>
+        <div className = "container">
+          <div style={{ fontSize: "40px", color: "white", textAlign: "center", fontWeight: "bold" }}>Stock Backtester</div>
+          <InputSelector setBacktesterData={setBacktesterData} setIsLoading={setIsLoading} />
+          {isLoading ?
+            <div style={{ display: "flex", justifyContent: "center", paddingTop: "30px" }}>
+              <Loader size={60} />
+            </div> : null}
+          </div>
+        </MantineProvider>
+    {backtesterData ?
         <div className="chartContainer">
           <LineChart data={backtesterData} />
           <BuySellChart data={backtesterData} />
         </div> : null}
-    </MantineProvider>
+    <br/>
+    <br/>
+    <br/>
+    </div>
   );
 }
 
