@@ -6,11 +6,11 @@ type DataType = {
     underlier_values: number[];
 };
 
-type SupportedSignal = '>' | '<' | '>=' | '<=';
+type SupportedSignal = '>=' | '<=';
 
 type SymbolValueObject = {
-    symbol: SupportedSignal;
-    value: number;
+    symbol: SupportedSignal | undefined;
+    value: number | undefined;
 }
 
 type RSIInput = {
@@ -52,5 +52,5 @@ type PostInput = {
 }
 
 
-export type { SupportedSignal, StrategyDict, DataType, RSIInput, MACDInput, SMAInput, PostInput };
+export type { SupportedSignal, SymbolValueObject, StrategyDict, DataType, RSIInput, MACDInput, SMAInput, PostInput };
 

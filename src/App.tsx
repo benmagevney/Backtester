@@ -1,14 +1,13 @@
 import { useState } from 'react';
 
-import { dummyData } from './utils/post-data';
 
 import './App.css';
-import { DataType, MACDInput, RSIInput, SMAInput } from './utils/App.type';
-import getData from './utils/App-client';
+import { DataType } from './utils/App.type';
 import { LineChart } from './components/LineChart';
 import { InputSelector } from './components/InputSelector';
 import '@mantine/core/styles.css';
 import { Loader, MantineProvider, createTheme } from '@mantine/core';
+import "./components/InputSelector.css"
 
 function App() {
 
@@ -24,7 +23,8 @@ function App() {
         <div style={{ display: "flex", justifyContent: "center", paddingTop: "30px" }}>
           <Loader size={60} />
         </div> : null}
-      {backtesterData ? <LineChart data={backtesterData} /> : null}
+      {backtesterData ?
+        <div className="chartContainer"><LineChart data={backtesterData} /></div> : null}
     </MantineProvider>
   );
 }

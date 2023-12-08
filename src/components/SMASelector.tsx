@@ -45,7 +45,7 @@ export function SMASelector({ useSMA, setSMA, SMADays, setSMADays, SMASymbol, se
                         value={SMADays} onChange={(value) => setSMADays(typeof value === "number" ? value : parseInt(value))}
                         disabled={!useSMA} error={useSMA && (typeof SMADays !== "number" || Number.isNaN(SMADays))} />
                     <Select className="selectItem" label="Symbol" value={SMASymbol} onChange={(value) => setSMASymbol(value == null ? undefined : value as SupportedSignal)}
-                        data={[">", "<", ">=", "<="]}
+                        data={[">=", "<="]}
                         disabled={!useSMA} error={useSMA && SMASymbol === undefined} />
                     <NumberInput className="selectItem" label="Value" prefix="$" min={0}
                         value={SMAValue} onChange={(value) => setSMAValue(typeof value === "number" ? value : parseInt(value))}

@@ -4,7 +4,6 @@
     align-content: center;
     /* justify-content: center; */
     align-items: center;
-
 }
 
 .selectItem {
@@ -28,20 +27,26 @@
 }
 
 .title {
-    font-size: 26px;
+    font-size: 32px;
     font-weight: bold;
     margin-right: 10px;
 }
 
 .statTitle {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: bold;
     margin-right: 10px;
 }
 
+.statHeading {
+    font-size: 16px;
+    font-style: italic;
+    padding-top: 5px;
+}
+
 .statGroup {
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 40px;
 }
 
 .error {
@@ -58,4 +63,15 @@
     align-items: center;
     /* padding: 10px; */
     padding-bottom: 10px;
+}
+
+.chartContainer {
+    padding: 20px;
+}
+
+.optionalTitle {
+    font-size: 18px;
+    /* font-weight: bold; */
+    margin-right: 10px;
+    padding-top: 20px;
 }

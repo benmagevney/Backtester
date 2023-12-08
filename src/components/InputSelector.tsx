@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { RSISelector } from './RSISelector';
 import { MACDSelector } from './MACDSelector';
 import { SMASelector } from './SMASelector';
-import { DataType, PostInput, StrategyDict, SupportedSignal } from '../utils/App.type';
+import { DataType, PostInput, StrategyDict, SupportedSignal, SymbolValueObject } from '../utils/App.type';
 import getData from '../utils/App-client';
 
 
@@ -40,6 +40,14 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
     const [sellRSISymbol, setSellRSISymbol] = useState<SupportedSignal | undefined>(undefined);
     const [sellRSIValue, setSellRSIValue] = useState<number | undefined>(undefined);
 
+    // RSI optionalStates
+    const defaultSymbolValueObject: SymbolValueObject = {
+        symbol: undefined,
+        value: undefined,
+    };
+    const [buyRSISlope, setBuyRSISlope] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [sellRSISlope, setSellRSISlope] = useState<SymbolValueObject>(defaultSymbolValueObject);
+
     // MACD states
     const [buyMACDFast, setBuyMACDFast] = useState<number | undefined>(undefined);
     const [buyMACDSlow, setBuyMACDSlow] = useState<number | undefined>(undefined);
@@ -51,6 +59,17 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
     const [sellMACDSignal, setSellMACDSignal] = useState<number | undefined>(undefined);
     const [sellMACDSymbol, setSellMACDSymbol] = useState<SupportedSignal | undefined>(undefined);
     const [sellMACDValue, setSellMACDValue] = useState<number | undefined>(undefined);
+
+    // MACD optionalStates
+    const [buyMACDSlope, setBuyMACDSlope] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [sellMACDSlope, setSellMACDSlope] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [buyMACDSignalOptional, setBuyMACDSignalOptional] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [sellMACDSignalOptional, setSellMACDSignalOptional] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [buyMACDSignalSlope, setBuyMACDSignalSlope] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [sellMACDSignalSlope, setSellMACDSignalSlope] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [buyMACDSignalDiff, setBuyMACDSignalDiff] = useState<SymbolValueObject>(defaultSymbolValueObject);
+    const [sellMACDSignalDiff, setSellMACDSignalDiff] = useState<SymbolValueObject>(defaultSymbolValueObject);
+
 
     // SMA states
     const [buySMADays, setBuySMADays] = useState<number | undefined>(undefined);
@@ -80,6 +99,9 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
                 symbol: buyRSISymbol,
                 value: buyRSIValue,
             };
+            if (buyRSISlope.symbol !== undefined && buyRSISlope.value !== undefined) {
+                buyDict.RSI.RSI_SLOPE = buyRSISlope;
+            }
         };
         if (useBuyMACD) {
             if (buyMACDFast === undefined || buyMACDSlow === undefined || buyMACDSignal === undefined || buyMACDSymbol === undefined || buyMACDValue === undefined) {
@@ -93,6 +115,18 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
                 symbol: buyMACDSymbol,
                 value: buyMACDValue,
             };
+            if (buyMACDSlope.symbol !== undefined && buyMACDSlope.value !== undefined) {
+                buyDict.MACD.MACD_SLOPE = buyMACDSlope;
+            }
+            if (buyMACDSignalOptional.symbol !== undefined && buyMACDSignalOptional.value !== undefined) {
+                buyDict.MACD.MACD_SIGNAL = buyMACDSignalOptional;
+            }
+            if (buyMACDSignalSlope.symbol !== undefined && buyMACDSignalSlope.value !== undefined) {
+                buyDict.MACD.MACD_SIGNAL_SLOPE = buyMACDSignalSlope;
+            }
+            if (buyMACDSignalDiff.symbol !== undefined && buyMACDSignalDiff.value !== undefined) {
+                buyDict.MACD.MACD_SIGNAL_DIFF = buyMACDSignalDiff;
+            }
         };
         if (useBuySMA) {
             if (buySMADays === undefined || buySMASymbol === undefined || buySMAValue === undefined) {
@@ -116,6 +150,9 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
                 symbol: sellRSISymbol,
                 value: sellRSIValue,
             };
+            if (sellRSISlope.symbol !== undefined && sellRSISlope.value !== undefined) {
+                sellDict.RSI.RSI_SLOPE = sellRSISlope;
+            }
         };
         if (useSellMACD) {
             if (sellMACDFast === undefined || sellMACDSlow === undefined || sellMACDSignal === undefined || sellMACDSymbol === undefined || sellMACDValue === undefined) {
@@ -129,6 +166,18 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
                 symbol: sellMACDSymbol,
                 value: sellMACDValue,
             };
+            if (sellMACDSlope.symbol !== undefined && sellMACDSlope.value !== undefined) {
+                sellDict.MACD.MACD_SLOPE = sellMACDSlope;
+            }
+            if (sellMACDSignalOptional.symbol !== undefined && sellMACDSignalOptional.value !== undefined) {
+                sellDict.MACD.MACD_SIGNAL = sellMACDSignalOptional;
+            }
+            if (sellMACDSignalSlope.symbol !== undefined && sellMACDSignalSlope.value !== undefined) {
+                sellDict.MACD.MACD_SIGNAL_SLOPE = sellMACDSignalSlope;
+            }
+            if (sellMACDSignalDiff.symbol !== undefined && sellMACDSignalDiff.value !== undefined) {
+                sellDict.MACD.MACD_SIGNAL_DIFF = sellMACDSignalDiff;
+            }
         };
         if (useSellSMA) {
             if (sellSMADays === undefined || sellSMASymbol === undefined || sellSMAValue === undefined) {
@@ -152,15 +201,16 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
 
 
     const handleSubmit = () => {
-        const postRequest = createPostRequest();
-        if (postRequest === undefined || postRequest === null) {
+        const postBody = createPostRequest();
+        console.log(postBody);
+        if (postBody === undefined || postBody === null) {
             setInvalidPost(true);
             return;
         }
         setInvalidPost(false);
         setIsLoading(true);
         setBacktesterData(void 0);
-        getData().then((data) => {
+        getData(postBody).then((data) => {
             setIsLoading(false);
             setBacktesterData(data);
         });
@@ -173,8 +223,9 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
             {invalidTickerPeriod ? <div className="error">Ticker and period must be defined</div> : null}
             <div className='topGroup'>
                 <TextInput className="selectItem" label="Stock Ticker" placeholder={"Ticker"} value={ticker === null ? undefined : ticker}
-                    onChange={(event) => setTicker(event.currentTarget.value)} />
-                <Select className="selectItem" label="Period" placeholder="Pick range"
+                    onChange={(event) => setTicker(event.currentTarget.value)}
+                    error={ticker === null} />
+                <Select className="selectItem" label="Period" placeholder="Period range"
                     data={[
                         { value: '1y', label: '1 Year' },
                         { value: '2y', label: '2 Years' },
@@ -183,21 +234,22 @@ export function InputSelector({ setBacktesterData, setIsLoading }: SelectorProps
                         { value: 'ytd', label: 'YTD' },
                         { value: 'max', label: 'Max' },
                     ]}
-                    onChange={(value) => setPeriod(value)} />
+                    onChange={(value) => setPeriod(value)}
+                    error={period == undefined} />
                 <Button variant="filled" onClick={handleSubmit} color="red">Submit</Button>
             </div>
             {invalidStrategy ? <div className="error">Must have at least one buy and sell strategy</div> : null}
             <div className="strategies">
                 <div className="strategyColumn">
                     <div className="title">Buy Strategy</div>
-                    <RSISelector useRSI={useBuyRSI} setRSI={setUseBuyRSI} RSIDays={buyRSIDays} setRSIDays={setBuyRSIDays} RSISymbol={buyRSISymbol} setRSISymbol={setBuyRSISymbol} RSIValue={buyRSIValue} setRSIValue={setBuyRSIValue} />
-                    <MACDSelector useMACD={useBuyMACD} setMACD={setUseBuyMACD} MACDFast={buyMACDFast} setMACDFast={setBuyMACDFast} MACDSlow={buyMACDSlow} setMACDSlow={setBuyMACDSlow} MACDSignal={buyMACDSignal} setMACDSignal={setBuyMACDSignal} MACDSymbol={buyMACDSymbol} setMACDSymbol={setBuyMACDSymbol} MACDValue={buyMACDValue} setMACDValue={setBuyMACDValue} />
+                    <RSISelector useRSI={useBuyRSI} setRSI={setUseBuyRSI} RSIDays={buyRSIDays} setRSIDays={setBuyRSIDays} RSISymbol={buyRSISymbol} setRSISymbol={setBuyRSISymbol} RSIValue={buyRSIValue} setRSIValue={setBuyRSIValue} RSISlope={buyRSISlope} setRSISlope={setBuyRSISlope} />
+                    <MACDSelector useMACD={useBuyMACD} setMACD={setUseBuyMACD} MACDFast={buyMACDFast} setMACDFast={setBuyMACDFast} MACDSlow={buyMACDSlow} setMACDSlow={setBuyMACDSlow} MACDSignal={buyMACDSignal} setMACDSignal={setBuyMACDSignal} MACDSymbol={buyMACDSymbol} setMACDSymbol={setBuyMACDSymbol} MACDValue={buyMACDValue} setMACDValue={setBuyMACDValue} MACDSlope={buyMACDSlope} setMACDSlope={setBuyMACDSlope} MACDSignalOptional={buyMACDSignalOptional} setMACDSignalOptional={setBuyMACDSignalOptional} MACDSignalSlope={buyMACDSignalSlope} setMACDSignalSlope={setBuyMACDSignalSlope} MACDSignalDiff={buyMACDSignalDiff} setMACDSignalDiff={setBuyMACDSignalDiff} />
                     <SMASelector useSMA={useBuySMA} setSMA={setUseBuySMA} SMADays={buySMADays} setSMADays={setBuySMADays} SMASymbol={buySMASymbol} setSMASymbol={setBuySMASymbol} SMAValue={buySMAValue} setSMAValue={setBuySMAValue} />
                 </div>
                 <div className="strategyColumn">
                     <div className="title">Sell Strategy</div>
-                    <RSISelector useRSI={useSellRSI} setRSI={setUseSellRSI} RSIDays={sellRSIDays} setRSIDays={setSellRSIDays} RSISymbol={sellRSISymbol} setRSISymbol={setSellRSISymbol} RSIValue={sellRSIValue} setRSIValue={setSellRSIValue} />
-                    <MACDSelector useMACD={useSellMACD} setMACD={setUseSellMACD} MACDFast={sellMACDFast} setMACDFast={setSellMACDFast} MACDSlow={sellMACDSlow} setMACDSlow={setSellMACDSlow} MACDSignal={sellMACDSignal} setMACDSignal={setSellMACDSignal} MACDSymbol={sellMACDSymbol} setMACDSymbol={setSellMACDSymbol} MACDValue={sellMACDValue} setMACDValue={setSellMACDValue} />
+                    <RSISelector useRSI={useSellRSI} setRSI={setUseSellRSI} RSIDays={sellRSIDays} setRSIDays={setSellRSIDays} RSISymbol={sellRSISymbol} setRSISymbol={setSellRSISymbol} RSIValue={sellRSIValue} setRSIValue={setSellRSIValue} RSISlope={sellRSISlope} setRSISlope={setSellRSISlope} />
+                    <MACDSelector useMACD={useSellMACD} setMACD={setUseSellMACD} MACDFast={sellMACDFast} setMACDFast={setSellMACDFast} MACDSlow={sellMACDSlow} setMACDSlow={setSellMACDSlow} MACDSignal={sellMACDSignal} setMACDSignal={setSellMACDSignal} MACDSymbol={sellMACDSymbol} setMACDSymbol={setSellMACDSymbol} MACDValue={sellMACDValue} setMACDValue={setSellMACDValue} MACDSlope={sellMACDSlope} setMACDSlope={setSellMACDSlope} MACDSignalOptional={sellMACDSignalOptional} setMACDSignalOptional={setSellMACDSignalOptional} MACDSignalSlope={sellMACDSignalSlope} setMACDSignalSlope={setSellMACDSignalSlope} MACDSignalDiff={sellMACDSignalDiff} setMACDSignalDiff={setSellMACDSignalDiff} />
                     <SMASelector useSMA={useSellSMA} setSMA={setUseSellSMA} SMADays={sellSMADays} setSMADays={setSellSMADays} SMASymbol={sellSMASymbol} setSMASymbol={setSellSMASymbol} SMAValue={sellSMAValue} setSMAValue={setSellSMAValue} />
                 </div>
 

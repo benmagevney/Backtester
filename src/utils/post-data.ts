@@ -13,7 +13,7 @@ const postData: PostInput = {
             "fast_moving_avg_period": 12,
             "slow_moving_avg_period": 26,
             "signal_period": 9,
-            "symbol": ">",
+            "symbol": ">=",
             "value": 0,
             "MACD_SIGNAL_SLOPE": {
                 "symbol": ">=",
@@ -35,7 +35,7 @@ const postData: PostInput = {
             "fast_moving_avg_period": 12,
             "slow_moving_avg_period": 26,
             "signal_period": 9,
-            "symbol": "<",
+            "symbol": "<=",
             "value": 0
         }
     }
