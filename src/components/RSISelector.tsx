@@ -59,7 +59,7 @@ export function RSISelector({ useRSI, setRSI, RSIDays, setRSIDays, RSISymbol, se
                     <Select className="selectItem" label="Symbol"  value={RSISymbol} onChange={(value) => setRSISymbol(value == null ? undefined : value as SupportedSignal)}
                         data={[">=", "<="]}
                         disabled={!useRSI} error={useRSI && RSISymbol === undefined} />
-                    <NumberInput className="selectItem" label="Value" min={0}
+                    <NumberInput className="selectItem" label="Value"
                         value={RSIValue} onChange={(value) => setRSIValue(typeof value === "number" ? value : parseInt(value))}
                         disabled={!useRSI} error={useRSI && (typeof RSIValue !== "number" || Number.isNaN(RSIValue))} />
                 </div>
@@ -73,7 +73,7 @@ export function RSISelector({ useRSI, setRSI, RSIDays, setRSIDays, RSISymbol, se
                         <Select className="selectItem" label="Symbol" value={RSISlope.symbol} onChange={(value) => saveOptionalSlope("symbol", value == null ? undefined : value as SupportedSignal)}
                             data={[">=", "<="]}
                             disabled={!useRSI} />
-                        <NumberInput className="selectItem" label="Value" min={0}
+                        <NumberInput className="selectItem" label="Value"
                             value={RSISlope.value} onChange={(value) => saveOptionalSlope("value", typeof value === "number" ? value : parseInt(value))}
                             disabled={!useRSI} />
                     </div>

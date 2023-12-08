@@ -35,7 +35,7 @@ const getChartData = (data: DataType) => {
                 fill: false,
                 backgroundColor: 'green',
                 borderColor: 'green',
-                pointRadius: 5,
+                pointRadius: 2,
                 showLine: false,
             },
             {
@@ -44,7 +44,7 @@ const getChartData = (data: DataType) => {
                 fill: false,
                 backgroundColor: 'red',
                 borderColor: 'red',
-                pointRadius: 5,
+                pointRadius: 2,
                 showLine: false,
             },
             {

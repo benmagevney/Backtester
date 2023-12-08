@@ -89,7 +89,7 @@ export function MACDSelector({ useMACD, setMACD, MACDFast, setMACDFast, MACDSlow
                     <Select disabled={!useMACD} className="selectItem" label="Symbol" style={{color: "white"}}
                         data={[">=", "<="]} value={MACDSymbol} onChange={(value) => setMACDSymbol(value == null ? undefined : value as SupportedSignal)}
                         error={useMACD && MACDSymbol === undefined} />
-                    <NumberInput disabled={!useMACD} className="selectItem" label="Value" style={{color: "white"}} min={0} value={MACDValue} onChange={(value) => setMACDValue(typeof value === "number" ? value : parseInt(value))}
+                    <NumberInput disabled={!useMACD} className="selectItem" label="Value" style={{color: "white"}} value={MACDValue} onChange={(value) => setMACDValue(typeof value === "number" ? value : parseInt(value))}
                         error={useMACD && (typeof MACDValue !== "number" || Number.isNaN(MACDValue))} />
                 </div>
                 <div className="statHeader" style={{ paddingTop: "8px" }}>
@@ -102,7 +102,7 @@ export function MACDSelector({ useMACD, setMACD, MACDFast, setMACDFast, MACDSlow
                         <Select className="selectItem" label="Symbol"  value={MACDSlope.symbol} onChange={(value) => saveMACDSlope("symbol", value == null ? undefined : value as SupportedSignal)}
                             data={[">=", "<="]}
                             disabled={!useMACD} />
-                        <NumberInput className="selectItem" label="Value"  min={0}
+                        <NumberInput className="selectItem" label="Value"
                             value={MACDSlope.value} onChange={(value) => saveMACDSlope("value", typeof value === "number" ? value : parseInt(value))}
                             disabled={!useMACD} />
                     </div>
@@ -111,7 +111,7 @@ export function MACDSelector({ useMACD, setMACD, MACDFast, setMACDFast, MACDSlow
                         <Select className="selectItem" label="Symbol" value={MACDSignalOptional.symbol} onChange={(value) => saveMACDSignalOptional("symbol", value == null ? undefined : value as SupportedSignal)}
                             data={[">=", "<="]}
                             disabled={!useMACD} />
-                        <NumberInput className="selectItem" label="Value" min={0}
+                        <NumberInput className="selectItem" label="Value"
                             value={MACDSignalOptional.value} onChange={(value) => saveMACDSignalOptional("value", typeof value === "number" ? value : parseInt(value))}
                             disabled={!useMACD} />
                     </div>
@@ -120,7 +120,7 @@ export function MACDSelector({ useMACD, setMACD, MACDFast, setMACDFast, MACDSlow
                         <Select className="selectItem" label="Symbol"  value={MACDSignalSlope.symbol} onChange={(value) => saveMACDSignalSlope("symbol", value == null ? undefined : value as SupportedSignal)}
                             data={[">=", "<="]}
                             disabled={!useMACD} />
-                        <NumberInput className="selectItem" label="Value"  min={0}
+                        <NumberInput className="selectItem" label="Value" 
                             value={MACDSignalSlope.value} onChange={(value) => saveMACDSignalSlope("value", typeof value === "number" ? value : parseInt(value))}
                             disabled={!useMACD} />
                     </div>
@@ -129,7 +129,7 @@ export function MACDSelector({ useMACD, setMACD, MACDFast, setMACDFast, MACDSlow
                         <Select className="selectItem" label="Symbol"  value={MACDSignalDiff.symbol} onChange={(value) => saveMACDSignalDiff("symbol", value == null ? undefined : value as SupportedSignal)}
                             data={[">=", "<="]}
                             disabled={!useMACD} />
-                        <NumberInput className="selectItem" label="Value"  min={0}
+                        <NumberInput className="selectItem" label="Value"
                             value={MACDSignalDiff.value} onChange={(value) => saveMACDSignalDiff("value", typeof value === "number" ? value : parseInt(value))}
                             disabled={!useMACD} />
                     </div>

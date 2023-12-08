@@ -20,7 +20,7 @@ function App() {
   return (
     <div style={{background:'rgba(35,38,61,255)'}}>
         <MantineProvider>
-        <div className = "container">
+        <div className = "container" >
           <div style={{ fontSize: "40px", color: "white", textAlign: "center", fontWeight: "bold" }}>Stock Backtester</div>
           <InputSelector setBacktesterData={setBacktesterData} setIsLoading={setIsLoading} />
           {isLoading ?

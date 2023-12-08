@@ -26,14 +26,14 @@ const getChartData = (data: DataType) => (
         labels: data.dates.map((date) => date.split(" ")[0]),
         datasets: [
             {
-                label: 'Strategy Values',
+                label: 'Strategy Percent Gain(Loss)',
                 data: data.strategy_values,
                 fill: false,
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgba(255, 99, 132, 0.2)',
             },
             {
-                label: 'Underlier Values',
+                label: 'Underlier Percent Gain(Loss)',
                 data: data.underlier_values,
                 fill: false,
                 backgroundColor: 'rgb(54, 162, 235)',
