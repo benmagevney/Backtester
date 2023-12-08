@@ -243,9 +243,9 @@ def backtest(
             underlier_values.append(data[date]/first_underlier_value * 100)
             if date in sorted_list:
                 curr_pos = True
-        elif curr_pos == True:    
-            strategy_values.append(strategy_values[-1] * underlier_values[-1]/underlier_values[-2])
+        elif curr_pos == True:   
             underlier_values.append(data[date]/first_underlier_value * 100)
+            strategy_values.append(strategy_values[-1] * underlier_values[-1]/underlier_values[-2])
             if date in sorted_list:
                 curr_pos = False
     return dates, string_buy_dates, string_sell_dates, strategy_values, underlier_values
@@ -293,6 +293,11 @@ def lambda_handler(event, context):
 
     return {
       'statusCode': 200,
+      'headers': {
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+      },
       'body': json.dumps(
           data
           )
@@ -301,5 +306,10 @@ def lambda_handler(event, context):
   except Exception as err:
     return {
       'statusCode': 400,
+      'headers': {
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+      },
       'body': json.dumps(str(err))
     }
