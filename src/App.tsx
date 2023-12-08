@@ -18,26 +18,29 @@ function App() {
 
   console.log(backtesterData);
   return (
-    <div style={{background:'rgba(35,38,61,255)'}}>
-        <MantineProvider>
-        <div className = "container" >
+    <MantineProvider>
+      <div style={{ background: 'rgba(35,38,61,255)' }}>
+
+        <div className="container" >
           <div style={{ fontSize: "40px", color: "white", textAlign: "center", fontWeight: "bold" }}>Stock Backtester</div>
           <InputSelector setBacktesterData={setBacktesterData} setIsLoading={setIsLoading} />
-          {isLoading ?
-            <div style={{ display: "flex", justifyContent: "center", paddingTop: "30px" }}>
-              <Loader size={60} />
-            </div> : null}
-          </div>
-        </MantineProvider>
-    {backtesterData ?
+
+        </div>
+
+        <br />
+        <br />
+
+      </div>
+      {isLoading ?
+        <div style={{ display: "flex", justifyContent: "center", paddingTop: "30px" }}>
+          <Loader size={60} />
+        </div> : null}
+      {backtesterData ?
         <div className="chartContainer">
           <LineChart data={backtesterData} />
           <BuySellChart data={backtesterData} />
         </div> : null}
-    <br/>
-    <br/>
-    <br/>
-    </div>
+    </MantineProvider>
   );
 }
 
